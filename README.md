@@ -1,1 +1,1 @@
-# HIT_CS32451_Labs
+# Labs of HIT Software Process and Tools
