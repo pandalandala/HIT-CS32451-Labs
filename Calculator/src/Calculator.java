@@ -1,6 +1,7 @@
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionListener;
+import java.awt.event.ItemEvent;
 import java.util.function.Consumer;
 import java.util.regex.Pattern;
 
@@ -17,7 +18,7 @@ public class Calculator {
     private JComboBox<String> comboCalcType, comboTheme;
     private JTextField inText; // Input
     // TODO
-    private JButton btnC, btnBack, btnMod, btnDiv, btnMul, btnSub, btnAdd, btn0, btn1, btn2, btn3, btn4, btn5, btn6, btn7, btn8, btn9, btnPoint, btnEqual;
+    private JButton btnC, btnBack, btnMod, btnDiv, btnMul, btnSub, btnAdd, btn0, btn1, btn2, btn3, btn4, btn5, btn6, btn7, btn8, btn9, btnPoint, btnEqual, btnRoot, btnPower, btnLog;
 
     private char opt = ' '; // Save the operator
     private boolean go = true; // For calculate with Opt != (=)
@@ -64,6 +65,9 @@ public class Calculator {
         window = new JFrame("Calculator");
         window.setSize(WINDOW_WIDTH, WINDOW_HEIGHT);
         window.setLocationRelativeTo(null); // Move window to center
+
+        comboCalcType = initCombo(new String[]{"Standard", "Scientific"}, 20, 30, "Calculator type", calcTypeSwitchEventConsumer);  // first incremental session
+        comboTheme = initCombo(new String[]{"Simple", "Colored", "DarkTheme"}, 230, 30, "Theme", themeSwitchEventConsumer); // second incremental session
 
         int[] x = {MARGIN_X, MARGIN_X + 90, 200, 290, 380};
         int[] y = {MARGIN_Y, MARGIN_Y + 100, MARGIN_Y + 180, MARGIN_Y + 260, MARGIN_Y + 340, MARGIN_Y + 420};
@@ -357,6 +361,56 @@ public class Calculator {
         });
         btnEqual.setSize(2 * BUTTON_WIDTH + 10, BUTTON_HEIGHT);
 
+        // first incremental session: add sqrt
+        btnRoot = initBtn("√", x[4], y[1], event -> {
+            if (Pattern.matches("([-]?\\d+[.]\\d*)|(\\d+)", inText.getText())) if (go) {
+                val = Math.sqrt(Double.parseDouble(inText.getText()));
+                if (Pattern.matches("[-]?[\\d]+[.][0]*", String.valueOf(val))) {
+                    inText.setText(String.valueOf((int) val));
+                } else {
+                    inText.setText(String.valueOf(val));
+                }
+                opt = '√';
+                addWrite = false;
+            }
+        });
+        btnRoot.setVisible(false);
+
+        // first incremental session: add pow
+        btnPower = initBtn("pow", x[4], y[2], event -> {
+            repaintFont();
+            if (Pattern.matches("([-]?\\d+[.]\\d*)|(\\d+)", inText.getText())) if (go) {
+                val = calc(val, inText.getText(), opt);
+                if (Pattern.matches("[-]?[\\d]+[.][0]*", String.valueOf(val))) {
+                    inText.setText(String.valueOf((int) val));
+                } else {
+                    inText.setText(String.valueOf(val));
+                }
+                opt = '^';
+                go = false;
+                addWrite = false;
+            } else {
+                opt = '^';
+            }
+        });
+        btnPower.setFont(new Font("Comic Sans MS", Font.PLAIN, 24));
+        btnPower.setVisible(false);
+
+        // first incremental session: add log
+        btnLog = initBtn("ln", x[4], y[3], event -> {
+            if (Pattern.matches("([-]?\\d+[.]\\d*)|(\\d+)", inText.getText())) if (go) {
+                val = Math.log(Double.parseDouble(inText.getText()));
+                if (Pattern.matches("[-]?[\\d]+[.][0]*", String.valueOf(val))) {
+                    inText.setText(String.valueOf((int) val));
+                } else {
+                    inText.setText(String.valueOf(val));
+                }
+                opt = 'l';
+                addWrite = false;
+            }
+        });
+        btnLog.setVisible(false);
+
         window.setLayout(null);
         window.setResizable(false);
         window.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); // Close button clicked? = End The process
@@ -411,4 +465,148 @@ public class Calculator {
     private void repaintFont() {
         inText.setFont(inText.getFont().deriveFont(Font.PLAIN));
     }
+
+    // first incremental session: add scientific mode
+    private Consumer<ItemEvent> calcTypeSwitchEventConsumer = event -> {
+        if (event.getStateChange() != ItemEvent.SELECTED) return;
+
+        String selectedItem = (String) event.getItem();
+        switch (selectedItem) {
+            case "Standard":
+                window.setSize(WINDOW_WIDTH, WINDOW_HEIGHT);
+                btnRoot.setVisible(false);
+                btnPower.setVisible(false);
+                btnLog.setVisible(false);
+                break;
+            case "Scientific":
+                window.setSize(WINDOW_WIDTH + 80, WINDOW_HEIGHT);
+                btnRoot.setVisible(true);
+                btnPower.setVisible(true);
+                btnLog.setVisible(true);
+                break;
+        }
+    };
+
+    // second incremental session: add different themes
+    private Consumer<ItemEvent> themeSwitchEventConsumer = event -> {
+        if (event.getStateChange() != ItemEvent.SELECTED) return;
+
+        String selectedTheme = (String) event.getItem();
+        switch (selectedTheme) {
+            case "Simple":
+                window.getContentPane().setBackground(null);
+                btnC.setBackground(null);
+                btnBack.setBackground(null);
+                btnMod.setBackground(null);
+                btnDiv.setBackground(null);
+                btnMul.setBackground(null);
+                btnSub.setBackground(null);
+                btnAdd.setBackground(null);
+                btnRoot.setBackground(null);
+                btnLog.setBackground(null);
+                btnPower.setBackground(null);
+                btnEqual.setBackground(null);
+                btn0.setBackground(null);
+                btn1.setBackground(null);
+                btn2.setBackground(null);
+                btn3.setBackground(null);
+                btn4.setBackground(null);
+                btn5.setBackground(null);
+                btn6.setBackground(null);
+                btn7.setBackground(null);
+                btn8.setBackground(null);
+                btn9.setBackground(null);
+                btnPoint.setBackground(null);
+
+                btnC.setForeground(Color.BLACK);
+                btnBack.setForeground(Color.BLACK);
+                btnMod.setForeground(Color.BLACK);
+                btnDiv.setForeground(Color.BLACK);
+                btnMul.setForeground(Color.BLACK);
+                btnSub.setForeground(Color.BLACK);
+                btnAdd.setForeground(Color.BLACK);
+                btnEqual.setForeground(Color.BLACK);
+                btnLog.setForeground(Color.BLACK);
+                btnPower.setForeground(Color.BLACK);
+                btnRoot.setForeground(Color.BLACK);
+                break;
+            case "Colored":
+                window.getContentPane().setBackground(null);
+                btnC.setBackground(Color.RED);
+                btnBack.setBackground(Color.ORANGE);
+                btnMod.setBackground(Color.GREEN);
+                btnDiv.setBackground(Color.PINK);
+                btnMul.setBackground(Color.PINK);
+                btnSub.setBackground(Color.PINK);
+                btnAdd.setBackground(Color.PINK);
+                btnRoot.setBackground(Color.PINK);
+                btnLog.setBackground(Color.PINK);
+                btnPower.setBackground(Color.PINK);
+                btnEqual.setBackground(Color.BLUE);
+                btn0.setBackground(Color.WHITE);
+                btn1.setBackground(Color.WHITE);
+                btn2.setBackground(Color.WHITE);
+                btn3.setBackground(Color.WHITE);
+                btn4.setBackground(Color.WHITE);
+                btn5.setBackground(Color.WHITE);
+                btn6.setBackground(Color.WHITE);
+                btn7.setBackground(Color.WHITE);
+                btn8.setBackground(Color.WHITE);
+                btn9.setBackground(Color.WHITE);
+                btnPoint.setBackground(Color.WHITE);
+
+                btnC.setForeground(Color.WHITE);
+                btnBack.setForeground(Color.WHITE);
+                btnMod.setForeground(Color.WHITE);
+                btnDiv.setForeground(Color.WHITE);
+                btnMul.setForeground(Color.WHITE);
+                btnSub.setForeground(Color.WHITE);
+                btnAdd.setForeground(Color.WHITE);
+                btnEqual.setForeground(Color.WHITE);
+                btnLog.setForeground(Color.WHITE);
+                btnPower.setForeground(Color.WHITE);
+                btnRoot.setForeground(Color.WHITE);
+                break;
+            case "DarkTheme":
+                final Color primaryDarkColor = new Color(141, 38, 99);
+                final Color secondaryDarkColor = new Color(171, 171, 171);
+
+                window.getContentPane().setBackground(new Color(68, 68, 68));
+                btn0.setBackground(secondaryDarkColor);
+                btn1.setBackground(secondaryDarkColor);
+                btn2.setBackground(secondaryDarkColor);
+                btn3.setBackground(secondaryDarkColor);
+                btn4.setBackground(secondaryDarkColor);
+                btn5.setBackground(secondaryDarkColor);
+                btn6.setBackground(secondaryDarkColor);
+                btn7.setBackground(secondaryDarkColor);
+                btn8.setBackground(secondaryDarkColor);
+                btn9.setBackground(secondaryDarkColor);
+                btnPoint.setBackground(secondaryDarkColor);
+
+                btnC.setForeground(secondaryDarkColor);
+                btnBack.setForeground(secondaryDarkColor);
+                btnMod.setForeground(secondaryDarkColor);
+                btnDiv.setForeground(secondaryDarkColor);
+                btnMul.setForeground(secondaryDarkColor);
+                btnSub.setForeground(secondaryDarkColor);
+                btnAdd.setForeground(secondaryDarkColor);
+                btnEqual.setForeground(secondaryDarkColor);
+                btnLog.setForeground(secondaryDarkColor);
+                btnPower.setForeground(secondaryDarkColor);
+                btnRoot.setForeground(secondaryDarkColor);
+                btnC.setBackground(primaryDarkColor);
+                btnBack.setBackground(primaryDarkColor);
+                btnMod.setBackground(primaryDarkColor);
+                btnDiv.setBackground(primaryDarkColor);
+                btnMul.setBackground(primaryDarkColor);
+                btnSub.setBackground(primaryDarkColor);
+                btnAdd.setBackground(primaryDarkColor);
+                btnRoot.setBackground(primaryDarkColor);
+                btnLog.setBackground(primaryDarkColor);
+                btnPower.setBackground(primaryDarkColor);
+                btnEqual.setBackground(primaryDarkColor);
+        }
+    };
+
 }
