@@ -17,7 +17,7 @@ public class Calculator {
     private JFrame window; // Main window
     private JComboBox<String> comboCalcType, comboTheme;
     private JTextField inText; // Input
-
+    // TODO
     private JButton btnC, btnBack, btnMod, btnDiv, btnMul, btnSub, btnAdd, btn0, btn1, btn2, btn3, btn4, btn5, btn6, btn7, btn8, btn9, btnPoint, btnEqual, btnRoot, btnPower, btnLog;
 
     private char opt = ' '; // Save the operator
@@ -70,8 +70,7 @@ public class Calculator {
         comboTheme = initCombo(new String[]{"Simple", "Colored", "DarkTheme"}, 230, 30, "Theme", themeSwitchEventConsumer); // second incremental session
 
         int[] x = {MARGIN_X, MARGIN_X + 90, 200, 290, 380};
-        int[] y = {MARGIN_Y, MARGIN_Y + 100, MARGIN_Y + 180,
-                MARGIN_Y + 260, MARGIN_Y + 340, MARGIN_Y + 420};
+        int[] y = {MARGIN_Y, MARGIN_Y + 100, MARGIN_Y + 180, MARGIN_Y + 260, MARGIN_Y + 340, MARGIN_Y + 420};
 
         inText = new JTextField("0");
         inText.setBounds(x[0], y[0], 350, 70);

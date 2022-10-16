@@ -23,8 +23,8 @@ class CalculatorTest {
         try {
 
             /*
-            * basic calculator test
-            * */
+             * basic calculator test
+             * */
             assertEquals(8, calculator.calc(first, second, '+'));
             assertEquals(10, calculator.calc(third, fourth, '+'));
             assertEquals(6.0, calculator.calc(fifth, sixth, '+'));
@@ -50,8 +50,8 @@ class CalculatorTest {
             assertEquals(2.5d, calculator.calc(fifth, sixth, '%'));
 
             /*
-            * scientific mode test
-            * */
+             * scientific mode test
+             * */
             assertEquals(243, calculator.calc(first, second, '^'));
             assertEquals(4096, calculator.calc(third, fourth, '^'));
             assertEquals(24.705294220065465, calculator.calc(fifth, sixth, '^'));
@@ -65,9 +65,9 @@ class CalculatorTest {
             assertEquals(1.252762968495368, Math.log(Double.parseDouble(sixth)));
 
             /*
-            * different themes test
-            * no unit test, only integration test
-            * */
+             * different themes test
+             * no unit test, only integration test
+             * */
 
         } catch (Exception e) {
             e.printStackTrace();

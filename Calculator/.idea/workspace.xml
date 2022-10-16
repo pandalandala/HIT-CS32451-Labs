@@ -2,11 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="41bae216-c6b1-454b-89e8-67fba684233c" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/out/test/Calculator/CalculatorTest.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/vcs.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Calculator/Calculator.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Calculator/Calculator.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Calculator/Main.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Calculator/Main.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/test/Calculator/CalculatorTest.class" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Calculator.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Calculator.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/test/CalculatorTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/test/CalculatorTest.java" afterDir="false" />
     </list>
@@ -39,20 +36,13 @@
     <property name="project.structure.last.edited" value="Modules" />
     <property name="project.structure.proportion" value="0.23350254" />
     <property name="project.structure.side.proportion" value="0.31343284" />
-    <property name="settings.editor.selected.configurable" value="preferences.pluginManager" />
   </component>
   <component name="RecentsManager">
     <key name="CreateClassDialog.RecentsKey">
       <recent name="" />
     </key>
   </component>
-  <component name="RunManager" selected="Application.Main">
-    <configuration name="Main (1)" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="Main" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
+  <component name="RunManager" selected="JUnit.CalculatorTest">
     <configuration name="Main" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="Main" />
       <module name="Calculator" />
@@ -86,7 +76,6 @@
     <recent_temporary>
       <list>
         <item itemvalue="Application.Main" />
-        <item itemvalue="Application.Main (1)" />
       </list>
     </recent_temporary>
   </component>
